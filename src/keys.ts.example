@@ -1,0 +1,9 @@
+export const firebaseConfig = {
+    apiKey: "XXX",
+    authDomain: "xxx",
+    databaseURL: "https://xxx",
+    projectId: "xxx",
+    storageBucket: "xxx",
+    messagingSenderId: "xxx",
+    appId: "xxx",
+}
