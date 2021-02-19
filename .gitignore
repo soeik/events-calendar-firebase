@@ -107,3 +107,5 @@ dist
 .idea
 /.firebaserc
 /src/keys.ts
+/src/config/config.ts
+/src/config/config.dev.ts

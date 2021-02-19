@@ -103,21 +103,12 @@ input:disabled {
     padding: 4px;
 }
 
-.event-actions {
-    border-top: 0 solid #eee;
-    border-bottom: 1px solid #eee;
-    padding: 10px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.event-actions > button {
-    margin-right: 2px;
-}
-
 .text-center {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .loading-overlay {

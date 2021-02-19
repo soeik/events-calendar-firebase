@@ -17,9 +17,7 @@ export const makeEvent = (rawEvent: RawEvent) =>
     status: new Date() <= new Date(rawEvent.date) ? "upcoming" : "occurred",
   } as Event);
 
-export const makeNewEventWithDefaults = (
-  initialValues?: Partial<RawEvent>
-) =>
+export const makeNewEventWithDefaults = (initialValues?: Partial<RawEvent>) =>
   ({
     title: "",
     reporter: "",

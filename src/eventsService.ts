@@ -1,7 +1,7 @@
 import { makeEvent, RawEvent, Event } from "./types";
 import { db } from "./firebase";
 
-const eventsCollection = db.collection("events");
+const eventsCollection = db.collection("seminars");
 
 export const eventsService = {
   fetch: () =>

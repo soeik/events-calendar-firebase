@@ -1,11 +1,14 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Event } from "../types";
-import { EventItem } from "../shared/EventItem";
+import { EventItem } from "./EventItem";
 import { eventsService } from "../eventsService";
 import { Row } from "../layout";
 import cx from "classnames";
 import { Loader } from "../shared/Loader";
+import { sortByDate } from "../utils";
+import { RouteComponentProps } from "@reach/router";
+import { useTranslation } from "react-i18next";
 
 enum ViewState {
   Loading = "Loading",
@@ -19,7 +22,8 @@ enum FilterCondition {
   Occurred = "occurred",
 }
 
-export function EventsPage() {
+export const EventsPage: FC<RouteComponentProps> = () => {
+  const { t } = useTranslation();
   const [events, setEvents] = useState<Event[]>([]);
   const [viewState, setViewState] = useState(ViewState.Loading);
   const [filter, setFilter] = useState(FilterCondition.Upcoming);
@@ -38,7 +42,7 @@ export function EventsPage() {
       {renderFilter()}
       {viewState === ViewState.Loading
         ? renderLoadingState()
-        : renderEvents()}
+        : renderSeminars()}
     </div>
   );
 
@@ -46,7 +50,8 @@ export function EventsPage() {
     return (
       <Row className="text-center">
         <h3 className="site-title">
-          Events calendar
+          {t("SiteTitle")}
+          <small>{t("SiteSubtitle")}</small>
         </h3>
       </Row>
     );
@@ -62,7 +67,7 @@ export function EventsPage() {
           value={FilterCondition.All}
           onClick={onFilterClick}
         >
-          Все
+          {t("All")}
         </button>
         <button
           className={cx({
@@ -71,7 +76,7 @@ export function EventsPage() {
           value={FilterCondition.Upcoming}
           onClick={onFilterClick}
         >
-          Предстоящие
+          {t("Upcoming")}
         </button>
         <button
           className={cx({
@@ -80,31 +85,23 @@ export function EventsPage() {
           value={FilterCondition.Occurred}
           onClick={onFilterClick}
         >
-          Прошедшие
+          {t("Occurred")}
         </button>
       </Row>
     );
   }
 
-  function renderEvents() {
+  function renderSeminars() {
     return (
       events
         .filter((s) => s.status === filter || filter === FilterCondition.All)
         // FIXME: Sorting doesn't work properly
-        .sort((a, b) => {
-          if (a.date > b.date) {
-            return 1;
-          } else if (a.date < b.date) {
-            return -1;
-          } else {
-            return 0;
-          }
-        })
-        .map((s) => <EventItem key={s.id} event={s} />)
+        .sort(sortByDate)
+        .map((s) => <EventItem key={s.id} seminar={s} />)
     );
   }
 
   function renderLoadingState() {
     return <Loader />;
   }
-}
+};

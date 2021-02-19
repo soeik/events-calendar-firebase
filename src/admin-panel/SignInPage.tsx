@@ -1,22 +1,16 @@
 import * as React from "react";
-import { useContext, useEffect, useState } from "react";
-import { AdminPanel } from "./AdminPanel";
+import { FC, useContext, useEffect, useState } from "react";
 import { authContext, AuthState } from "../authContext";
-import { SignIn } from "./SignIn";
+import { SignInForm } from "./SignInForm";
 import { auth } from "../firebase";
 import { Loader } from "../shared/Loader";
+import { RouteComponentProps, useNavigate } from "@reach/router";
+import { RouterPath } from "../router-path";
 
-export function Gatekeeper() {
+export const SignInPage: FC<RouteComponentProps> = () => {
+  const navigate = useNavigate();
   const { authState, setAuthState } = useContext(authContext);
   const [authError, setAuthError] = useState();
-
-  useEffect(() => {
-    setAuthState(AuthState.Authenticating);
-    auth.onAuthStateChanged((userData) => {
-      const newAuthState = userData ? AuthState.LoggedIn : AuthState.LoggedOut;
-      setAuthState(newAuthState);
-    });
-  }, []);
 
   const onSignIn = ({ email, password }) => {
     setAuthState(AuthState.Authenticating);
@@ -30,13 +24,15 @@ export function Gatekeeper() {
       });
   };
 
+  useEffect(() => {
+    if (authState === AuthState.LoggedIn) {
+      navigate(RouterPath.Panel);
+    }
+  }, [authState]);
+
   if (authState === AuthState.Authenticating) {
     return <Loader />;
   }
 
-  return authState === AuthState.LoggedIn ? (
-    <AdminPanel />
-  ) : (
-    <SignIn onSignIn={onSignIn} authError={authError} />
-  );
-}
+  return <SignInForm onSignIn={onSignIn} authError={authError} />;
+};

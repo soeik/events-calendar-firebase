@@ -3,14 +3,15 @@ import * as React from "react";
 import { useForm } from "../util/useForm";
 import { Column, Row } from "../layout";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-interface Props {
+interface EditEventFormProps {
   onSubmit: (e) => void;
   disabled?: boolean;
   event?: Event;
 }
 
-enum EventFormFields {
+enum EditEventFormFields {
   Title = "title",
   Reporter = "reporter",
   Date = "date",
@@ -22,13 +23,14 @@ export function EditEventForm({
   onSubmit,
   disabled,
   event,
-}: Props) {
+}: EditEventFormProps) {
   // TODO: Form validation
   // TODO: Error handing
+  const { t } = useTranslation();
 
   const validateForm = (formFields) => {
     let valid = true;
-    Object.values(EventFormFields).forEach((key) => {
+    Object.values(EditEventFormFields).forEach((key) => {
       if (!formFields[key]) {
         valid = false;
       }
@@ -54,11 +56,11 @@ export function EditEventForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Row>
         <Column>
-          <label>Topic</label>
+          <label>{t("EventTitle")}</label>
           <input
             className="u-full-width"
             type="text"
-            name={EventFormFields.Title}
+            name={EditEventFormFields.Title}
             onChange={handleChange}
             value={values.title}
             disabled={disabled}
@@ -67,11 +69,11 @@ export function EditEventForm({
       </Row>
       <Row>
         <Column>
-          <label>Reporter</label>
+          <label>{t("Speaker")}</label>
           <input
             className="u-full-width"
             type="text"
-            name={EventFormFields.Reporter}
+            name={EditEventFormFields.Reporter}
             onChange={handleChange}
             value={values.reporter}
             disabled={disabled}
@@ -80,22 +82,22 @@ export function EditEventForm({
       </Row>
       <Row>
         <Column size={6}>
-          <label>Date</label>
+          <label>{t("Date")}</label>
           <input
             className="u-full-width"
             type="date"
-            name={EventFormFields.Date}
+            name={EditEventFormFields.Date}
             onChange={handleChange}
             value={values.date}
             disabled={disabled}
           />
         </Column>
         <Column size={6}>
-          <label>Time</label>
+          <label>{t("Time")}</label>
           <input
             className="u-full-width"
             type="time"
-            name={EventFormFields.Time}
+            name={EditEventFormFields.Time}
             onChange={handleChange}
             value={values.time}
             disabled={disabled}
@@ -104,11 +106,11 @@ export function EditEventForm({
       </Row>
       <Row>
         <Column>
-          <label>Place</label>
+          <label>{t("Place")}</label>
           <input
             className="u-full-width"
             type="text"
-            name={EventFormFields.Place}
+            name={EditEventFormFields.Place}
             onChange={handleChange}
             value={values.place}
             disabled={disabled}
@@ -118,7 +120,7 @@ export function EditEventForm({
       <Row>
         <Column>
           <button className="button-primary" disabled={!formValid || disabled}>
-            Save
+            {t("Save")}
           </button>
         </Column>
       </Row>
