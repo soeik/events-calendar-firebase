@@ -3,5 +3,5 @@ export const RouterPath = {
   SignIn: "/sign-in",
   Panel: "/panel",
   AddEvent: "/panel/add-event",
-  EditEvent: "/edit-event/", // TODO: generate with id
+  EditEvent: "/edit-event/:id", // TODO: generate with id
 };

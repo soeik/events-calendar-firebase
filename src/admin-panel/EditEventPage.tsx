@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Header } from "./Header";
-import { AddEvent } from "./AddEvent";
 
 export function EditEventPage() {
   return (
     <>
       <Header />
-      <AddEvent />
+      <h1>TODO: Edit event page</h1>
+      {/* <AddEvent />*/}
     </>
   );
 }
