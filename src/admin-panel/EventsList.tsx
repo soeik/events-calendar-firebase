@@ -7,7 +7,7 @@ import { Loader } from "../shared/Loader";
 import { sortByDate } from "../utils";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "@reach/router";
-import { RouterPath } from "../router-path";
+import { generateEditEventPath } from "../router-path";
 
 enum ViewState {
   Loading = "Loading",
@@ -50,7 +50,7 @@ export function EventsList() {
           <Column size={2}>
             <div className="text-right">
               <div>
-                <button onClick={() => navigate(RouterPath.EditEvent + s.id)}>
+                <button onClick={() => navigate(generateEditEventPath(s.id))}>
                   {t("Edit")}
                 </button>
               </div>

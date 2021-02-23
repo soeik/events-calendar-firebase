@@ -1,12 +1,17 @@
 import * as React from "react";
 import { Header } from "./Header";
-import { AddEvent } from "./AddEvent";
+import { EditEvent } from "./EditEvent";
+import { RouteComponentProps } from "@reach/router";
 
-export function EditEventPage() {
+interface EditEventPageProps extends RouteComponentProps {
+  eventId?: string;
+}
+
+export function EditEventPage({ eventId }: EditEventPageProps) {
   return (
     <>
       <Header />
-      <AddEvent />
+      <EditEvent eventId={eventId} />
     </>
   );
 }

@@ -10,6 +10,7 @@ import { authContext, AuthState } from "./authContext";
 import { auth } from "./firebase";
 import { RouterPath } from "./router-path";
 import { ProtectedRoute } from "./admin-panel/ProtectedRoute";
+import {EditEventPage} from "./admin-panel/EditEventPage";
 
 export function App() {
   const { setAuthState } = useContext(authContext);
@@ -29,6 +30,7 @@ export function App() {
       <SignInPage path={RouterPath.SignIn} />
       <ProtectedRoute as={AdminPanelPage} path={RouterPath.Panel} />
       <ProtectedRoute as={AddEventPage} path={RouterPath.AddEvent} />
+      <ProtectedRoute as={EditEventPage} path={RouterPath.EditEvent} />
     </Router>
   );
 }
