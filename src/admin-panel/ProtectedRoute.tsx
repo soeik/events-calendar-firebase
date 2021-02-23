@@ -8,10 +8,10 @@ import { RouterPath } from "../router-path";
 import { useTranslation } from "react-i18next";
 
 interface Props extends RouteComponentProps {
-  as: React.ComponentType;
+  as: React.ComponentType<any>;
 }
 
-export function ProtectedRoute({ as }: Props) {
+export function ProtectedRoute({ as, ...rest }: Props) {
   const { t } = useTranslation();
   const { authState } = useContext(authContext);
   const navigate = useNavigate();
@@ -45,5 +45,5 @@ export function ProtectedRoute({ as }: Props) {
     return <Loader />;
   }
 
-  return <Component />;
+  return <Component {...rest} />;
 }

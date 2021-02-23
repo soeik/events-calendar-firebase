@@ -32,6 +32,7 @@ const resources = {
       EventSuccessfullySaved: "Event successfully saved",
       SavingError: "Saving error",
       Edit: "Edit",
+      EditEvent: "Edit event",
     },
   },
   ru: {
@@ -62,19 +63,20 @@ const resources = {
       EventSuccessfullySaved: "Семинар успешно сохранен",
       SavingError: "Ошибка сохранения",
       Edit: "Редактировать",
+      EditEvent: "Редактировать семинар",
     },
   },
 };
 
 i18n
-    .use(initReactI18next) // passes i18n down to react-i18next
-    .init({
-      resources,
-      lng: "en",
-      keySeparator: false, // we do not use keys in form messages.welcome
-      interpolation: {
-        escapeValue: false, // react already safes from xss
-      },
-    });
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    resources,
+    lng: "en",
+    keySeparator: false, // we do not use keys in form messages.welcome
+    interpolation: {
+      escapeValue: false, // react already safes from xss
+    },
+  });
 
 export default i18n;
